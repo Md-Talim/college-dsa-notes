@@ -1,5 +1,51 @@
 # College DSA Notes
 
+## Sorting
+
+<details>
+<summary><code>Heap Sort</code></summary>
+
+```java
+public static void heapify(int heap[], int i, int size) {
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+    int maxIdx = i;
+
+    if (left < size && heap[left] > heap[maxIdx]) {
+        maxIdx = left;
+    }
+
+    if (right < size && heap[right] > heap[maxIdx]) {
+        maxIdx = right;
+    }
+
+    if (maxIdx != i) {
+        int temp = heap[i];
+
+        heap[i] = heap[maxIdx];
+        heap[maxIdx] = temp;
+        heapify(heap, maxIdx, size);
+    }
+}
+
+public static void heapSort(int arr[]) {
+    int n = arr.length;
+
+    for (int i = n / 2; i >= 0; i--) {
+        heapify(arr, i, n);
+    }
+
+    for (int i = n - 1; i > 0; i--) {
+        int temp = arr[0];
+        arr[0] = arr[i];
+        arr[i] = temp;
+        heapify(arr, 0, i);
+    }
+}
+```
+
+</details>
+
 ## Queue
 
 <details>
