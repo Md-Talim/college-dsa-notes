@@ -3,6 +3,156 @@
 ## Sorting
 
 <details>
+<summary><code>Bubble Sort</code></summary>
+
+```java
+public static void bubbleSort(int[] arr) {
+    for (int i = arr.length - 1; i >= 0; i--) {
+        for (int j = 0; j <= i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                swap(arr, j, j + 1);
+            }
+        }
+    }
+}
+```
+
+</details>
+
+<details>
+<summary><code>Selection Sort</code></summary>
+
+```java
+public static void selectionSort(int[] arr) {
+    for (int i = 0; i < arr.length - 1; i++) {
+        int minIndex = i;
+
+        for (int j = i + 1; j < arr.length; j++) {
+            if (arr[j] < arr[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex == i) {
+            continue;
+        }
+
+        swap(arr, minIndex, i);
+    }
+}
+```
+
+</details>
+
+<details>
+<summary><code>Insertion Sort</code></summary>
+
+```java
+public static void insertionSort(int[] arr) {
+    for (int i = 1; i < arr.length; i++) {
+        int currElement = arr[i];
+        int prevPointer = i - 1;
+
+        while (prevPointer >= 0 && arr[prevPointer] > currElement) {
+            arr[prevPointer + 1] = arr[prevPointer];
+            prevPointer--;
+        }
+
+        arr[prevPointer + 1] = currElement;
+    }
+}
+```
+
+</details>
+
+<details>
+<summary><code>Merge Sort</code></summary>
+
+```java
+public static void merge(int[] arr, int low, int mid, int high) {
+    int[] temp = new int[high - low + 1];
+    int left = low;
+    int right = mid + 1;
+    int index = 0;
+
+    while (left <= mid && right <= high) {
+        if (arr[left] <= arr[right]) {
+            temp[index] = arr[left];
+            left++;
+        } else {
+            temp[index] = arr[right];
+            right++;
+        }
+
+        index++;
+    }
+
+    while (left <= mid) {
+        temp[index++] = arr[left++];
+    }
+
+    while (right <= high) {
+        temp[index++] = arr[right++];
+    }
+
+    for (int i = low; i <= high; i++) {
+        arr[i] = temp[i - low];
+    }
+}
+
+public static void mergeSort(int[] arr, int low, int high) {
+    System.out.println("Merge Sort");
+
+    if (low >= high) {
+        return;
+    }
+
+    int mid = low + (high - low) / 2;
+    mergeSort(arr, low, mid);
+    mergeSort(arr, mid + 1, high);
+
+    merge(arr, low, mid, high);
+}
+```
+
+</details>
+
+</details>
+
+<details>
+<summary><code>Quick Sort</code></summary>
+
+```java
+public static int partition(int[] arr, int low, int high) {
+    int pivot = arr[high];
+    int i = low - 1;
+
+    for (int j = low; j < high; j++) {
+        if (arr[j] <= pivot) {
+            i++;
+            swap(arr, i, j);
+        }
+    }
+
+    i++;
+    swap(arr, i, high);
+    return i;
+}
+
+public static void quickSort(int[] arr, int low, int high) {
+    if (low >= high) {
+        return;
+    }
+
+    int pivotIndex = partition(arr, low, high);
+    quickSort(arr, low, pivotIndex - 1);
+    quickSort(arr, pivotIndex + 1, high);
+}
+```
+
+</details>
+
+<details>
 <summary><code>Heap Sort</code></summary>
 
 ```java
